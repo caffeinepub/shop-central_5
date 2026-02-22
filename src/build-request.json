@@ -1,0 +1,78 @@
+{
+  "kind": "build_request",
+  "title": "Update currency to INR and add food category with delivery options",
+  "projectName": "Shop Central",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "text": "Change the price display and input from USD to Indian Rupees (INR) throughout the application. Update all price labels to show '₹' symbol or 'INR' instead of 'USD'. This includes ProductCard, ProductDetail, CartItem, ShoppingCart order summary, OrderConfirmation, and the CreateProduct form.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-last"
+        ],
+        "quotes": [
+          "price is in usd make it in Indian rupees"
+        ]
+      },
+      "acceptanceCriteria": [
+        "All price displays show '₹' symbol or 'INR' label instead of '$' or 'USD'",
+        "Product creation form labels price input as 'Price (INR)' or similar",
+        "Cart and checkout pages show prices in INR",
+        "Order confirmation displays total in INR"
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Add 'Food' as a new product category option. This category should appear in the category dropdown when creating products and in the category filter navigation on the product catalog page.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-last"
+        ],
+        "quotes": [
+          "add 1 more category that it is a food product"
+        ]
+      },
+      "acceptanceCriteria": [
+        "CreateProduct form includes 'Food' in the category dropdown",
+        "Product catalog navigation shows 'Food' as a filterable category",
+        "Products can be created with 'Food' category and displayed correctly"
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Add a delivery type field to products with two options: '1-hour delivery' and 'Takeaway'. Include this field in the product creation form, product data model in the backend, and display it on product cards and detail pages.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-last"
+        ],
+        "quotes": [
+          "add 1 more category that it is delivery in 1 hour or takeaway"
+        ]
+      },
+      "acceptanceCriteria": [
+        "CreateProduct form includes a delivery type selector with '1-hour delivery' and 'Takeaway' options",
+        "Backend Product type includes a deliveryType field",
+        "ProductCard shows the delivery type for each product",
+        "ProductDetail page displays the delivery type information",
+        "Existing products handle the new field gracefully (default or migration)"
+      ]
+    }
+  ],
+  "constraints": [
+    "Preserve all existing product data during schema updates",
+    "Maintain backward compatibility with existing products when adding delivery type field"
+  ],
+  "nonGoals": [
+    "Implementing actual delivery tracking or logistics",
+    "Adding payment processing in INR",
+    "Creating separate ordering flows for delivery vs takeaway"
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  }
+}

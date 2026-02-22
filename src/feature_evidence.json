@@ -1,0 +1,73 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-change-the-price-display-and-input-from-usd-to-indian-rupees-inr-throughout-the-application-update-all-price-labels-to-show-symbol-or-inr-instead-of-usd-this-includes-productcard-productdetail-cartitem-shoppingcart-order-summary-orderconfirmation-and-the-createproduct-form",
+      "featureTitle": "Change the price display and input from USD to Indian Rupees (INR) throughout the application. Update all price labels to show '₹' symbol or 'INR' instead of 'USD'. This includes ProductCard, ProductDetail, CartItem, ShoppingCart order summary, OrderConfirmation, and the CreateProduct form.",
+      "files": [
+        "frontend/src/components/CartItem.tsx",
+        "frontend/src/components/ProductCard.tsx",
+        "frontend/src/pages/CreateProduct.tsx",
+        "frontend/src/pages/OrderConfirmation.tsx",
+        "frontend/src/pages/ProductDetail.tsx",
+        "frontend/src/pages/ShoppingCart.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-1"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-food-as-a-new-product-category-option-this-category-should-appear-in-the-category-dropdown-when-creating-products-and-in-the-category-filter-navigation-on-the-product-catalog-page",
+      "featureTitle": "Add 'Food' as a new product category option. This category should appear in the category dropdown when creating products and in the category filter navigation on the product catalog page.",
+      "files": [
+        "frontend/src/components/Header.tsx",
+        "frontend/src/pages/CreateProduct.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-2"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-a-delivery-type-field-to-products-with-two-options-1-hour-delivery-and-takeaway-include-this-field-in-the-product-creation-form-product-data-model-in-the-backend-and-display-it-on-product-cards-and-detail-pages",
+      "featureTitle": "Add a delivery type field to products with two options: '1-hour delivery' and 'Takeaway'. Include this field in the product creation form, product data model in the backend, and display it on product cards and detail pages.",
+      "files": [
+        "frontend/src/components/ProductCard.tsx",
+        "frontend/src/pages/CreateProduct.tsx",
+        "frontend/src/pages/ProductDetail.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-3"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

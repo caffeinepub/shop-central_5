@@ -1,0 +1,88 @@
+{
+  "kind": "coverage_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-22T11:34:32.187Z",
+  "sources": {
+    "buildRequest": true,
+    "implementationPlan": true
+  },
+  "requirements": {
+    "total": 3,
+    "implemented": 3,
+    "items": [
+      {
+        "id": "REQ-1",
+        "summary": "Change the price display and input from USD to Indian Rupees (INR) throughout the application. Update all price labels to show '₹' symbol or 'INR' instead of 'USD'. This includes ProductCard, ProductDetail, CartItem, ShoppingCart order summary, OrderConfirmation, and the CreateProduct form.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/ProductCard.tsx",
+          "frontend/src/pages/ProductDetail.tsx",
+          "frontend/src/components/CartItem.tsx",
+          "frontend/src/pages/ShoppingCart.tsx",
+          "frontend/src/pages/OrderConfirmation.tsx",
+          "frontend/src/pages/CreateProduct.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/ProductCard.tsx",
+          "frontend/src/pages/ProductDetail.tsx",
+          "frontend/src/components/CartItem.tsx",
+          "frontend/src/pages/ShoppingCart.tsx",
+          "frontend/src/pages/OrderConfirmation.tsx",
+          "frontend/src/pages/CreateProduct.tsx"
+        ]
+      },
+      {
+        "id": "REQ-2",
+        "summary": "Add 'Food' as a new product category option. This category should appear in the category dropdown when creating products and in the category filter navigation on the product catalog page.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/CreateProduct.tsx",
+          "frontend/src/components/Header.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/CreateProduct.tsx",
+          "frontend/src/components/Header.tsx"
+        ]
+      },
+      {
+        "id": "REQ-3",
+        "summary": "Add a delivery type field to products with two options: '1-hour delivery' and 'Takeaway'. Include this field in the product creation form, product data model in the backend, and display it on product cards and detail pages.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/CreateProduct.tsx",
+          "frontend/src/components/ProductCard.tsx",
+          "frontend/src/pages/ProductDetail.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/CreateProduct.tsx",
+          "frontend/src/components/ProductCard.tsx",
+          "frontend/src/pages/ProductDetail.tsx"
+        ]
+      }
+    ]
+  },
+  "changedFiles": [
+    "backend/main.mo",
+    "backend/migration.mo",
+    "build-request.json",
+    "feature_evidence.json",
+    "frontend-file-summaries.txt",
+    "frontend-implementation-plan.json",
+    "frontend/src/backend.d.ts",
+    "frontend/src/backend.ts",
+    "frontend/src/components/CartItem.tsx",
+    "frontend/src/components/Header.tsx",
+    "frontend/src/components/ProductCard.tsx",
+    "frontend/src/declarations/backend.did.d.ts",
+    "frontend/src/declarations/backend.did.js",
+    "frontend/src/hooks/useProducts.ts",
+    "frontend/src/pages/CreateProduct.tsx",
+    "frontend/src/pages/OrderConfirmation.tsx",
+    "frontend/src/pages/ProductDetail.tsx",
+    "frontend/src/pages/ShoppingCart.tsx",
+    "project_state.json",
+    "scratch/component-selection.json",
+    "spec.md",
+    "spec_vs_diff_report.json"
+  ]
+}

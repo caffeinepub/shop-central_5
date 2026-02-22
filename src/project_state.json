@@ -1,0 +1,61 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 3,
+  "summary": "E-commerce application with product management, pricing in Indian Rupees, food product categorization, and delivery/takeaway options",
+  "architectural_notes": [
+    "Product pricing system uses Indian Rupees (INR) as currency",
+    "Product categorization includes food products",
+    "Delivery system supports two options: 1-hour delivery and takeaway"
+  ],
+  "known_issues": [],
+  "isFixRequest": false,
+  "existing_features": [
+    {
+      "id": "feature-change-the-price-display-and-input-from-usd-to-indian-rupees-inr-throughout-the-application-update-all-price-labels-to-show-symbol-or-inr-instead-of-usd-this-includes-productcard-productdetail-cartitem-shoppingcart-order-summary-orderconfirmation-and-the-createproduct-form",
+      "title": "Change the price display and input from USD to Indian Rupees (INR) throughout the application. Update all price labels to show '₹' symbol or 'INR' instead of 'USD'. This includes ProductCard, ProductDetail, CartItem, ShoppingCart order summary, OrderConfirmation, and the CreateProduct form.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-food-as-a-new-product-category-option-this-category-should-appear-in-the-category-dropdown-when-creating-products-and-in-the-category-filter-navigation-on-the-product-catalog-page",
+      "title": "Add 'Food' as a new product category option. This category should appear in the category dropdown when creating products and in the category filter navigation on the product catalog page.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-delivery-type-field-to-products-with-two-options-1-hour-delivery-and-takeaway-include-this-field-in-the-product-creation-form-product-data-model-in-the-backend-and-display-it-on-product-cards-and-detail-pages",
+      "title": "Add a delivery type field to products with two options: '1-hour delivery' and 'Takeaway'. Include this field in the product creation form, product data model in the backend, and display it on product cards and detail pages.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Change price currency from USD to Indian Rupees (INR)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Add food product category option",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Add delivery type options: 1-hour delivery or takeaway",
+      "reqIds": [],
+      "status": "pending"
+    }
+  ],
+  "projectName": "Shop Central",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

@@ -1,0 +1,89 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --radius: 0.5rem;
+        /* Cream background with warm undertones */
+        --background: 0.97 0.015 65;
+        --foreground: 0.25 0.02 45;
+        /* Terracotta primary */
+        --primary: 0.58 0.15 35;
+        --primary-foreground: 0.98 0.01 65;
+        /* Sage green secondary */
+        --secondary: 0.72 0.08 145;
+        --secondary-foreground: 0.25 0.02 145;
+        /* Muted earth tones */
+        --muted: 0.92 0.01 65;
+        --muted-foreground: 0.52 0.02 45;
+        /* Accent - warm terracotta */
+        --accent: 0.88 0.03 45;
+        --accent-foreground: 0.35 0.03 35;
+        --destructive: 0.577 0.245 27.325;
+        --destructive-foreground: 0.985 0 0;
+        --border: 0.88 0.015 65;
+        --input: 0.88 0.015 65;
+        --ring: 0.58 0.15 35;
+        --card: 0.99 0.01 65;
+        --card-foreground: 0.25 0.02 45;
+        --popover: 0.99 0.01 65;
+        --popover-foreground: 0.25 0.02 45;
+        --chart-1: 0.58 0.15 35;
+        --chart-2: 0.72 0.08 145;
+        --chart-3: 0.65 0.12 85;
+        --chart-4: 0.48 0.18 25;
+        --chart-5: 0.78 0.06 165;
+        --sidebar: 0.97 0.015 65;
+        --sidebar-foreground: 0.25 0.02 45;
+        --sidebar-primary: 0.58 0.15 35;
+        --sidebar-primary-foreground: 0.98 0.01 65;
+        --sidebar-accent: 0.92 0.01 65;
+        --sidebar-accent-foreground: 0.35 0.03 35;
+        --sidebar-border: 0.88 0.015 65;
+        --sidebar-ring: 0.58 0.15 35;
+    }
+
+    .dark {
+        --background: 0.22 0.02 45;
+        --foreground: 0.95 0.01 65;
+        --primary: 0.68 0.12 35;
+        --primary-foreground: 0.15 0.02 45;
+        --secondary: 0.42 0.06 145;
+        --secondary-foreground: 0.95 0.01 145;
+        --muted: 0.32 0.02 45;
+        --muted-foreground: 0.72 0.02 65;
+        --accent: 0.38 0.03 35;
+        --accent-foreground: 0.95 0.01 65;
+        --destructive: 0.704 0.191 22.216;
+        --destructive-foreground: 0.95 0.01 65;
+        --border: 0.32 0.02 45;
+        --input: 0.32 0.02 45;
+        --ring: 0.68 0.12 35;
+        --card: 0.25 0.02 45;
+        --card-foreground: 0.95 0.01 65;
+        --popover: 0.25 0.02 45;
+        --popover-foreground: 0.95 0.01 65;
+        --chart-1: 0.68 0.12 35;
+        --chart-2: 0.62 0.08 145;
+        --chart-3: 0.55 0.1 85;
+        --chart-4: 0.58 0.15 25;
+        --chart-5: 0.68 0.06 165;
+        --sidebar: 0.25 0.02 45;
+        --sidebar-foreground: 0.95 0.01 65;
+        --sidebar-primary: 0.68 0.12 35;
+        --sidebar-primary-foreground: 0.15 0.02 45;
+        --sidebar-accent: 0.32 0.02 45;
+        --sidebar-accent-foreground: 0.95 0.01 65;
+        --sidebar-border: 0.32 0.02 45;
+        --sidebar-ring: 0.68 0.12 35;
+    }
+
+    * {
+        @apply border-border;
+    }
+    body {
+        @apply bg-background text-foreground;
+    }
+}
+

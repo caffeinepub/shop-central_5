@@ -1,0 +1,98 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Update currency to INR and add food category with delivery options",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "summary": "Change price display from USD to Indian Rupees (INR) throughout the application",
+      "acceptanceCriteria": [
+        "All price displays show '₹' symbol or 'INR' label instead of '$' or 'USD'",
+        "Product creation form labels price input as 'Price (INR)' or similar",
+        "Cart and checkout pages show prices in INR",
+        "Order confirmation displays total in INR"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/ProductCard.tsx",
+          "operation": "modify",
+          "description": "Update price display to show '₹' symbol instead of '$'. Change the price formatting from `$${product.price}` to `₹${product.price}` or similar INR formatting."
+        },
+        {
+          "path": "frontend/src/pages/ProductDetail.tsx",
+          "operation": "modify",
+          "description": "Update price display to show '₹' symbol instead of '$'. Modify the price rendering to use INR format with rupee symbol."
+        },
+        {
+          "path": "frontend/src/components/CartItem.tsx",
+          "operation": "modify",
+          "description": "Update price and total displays to show '₹' symbol instead of '$'. Change both individual item price and calculated total to use INR formatting."
+        },
+        {
+          "path": "frontend/src/pages/ShoppingCart.tsx",
+          "operation": "modify",
+          "description": "Update order summary section to display subtotal, shipping, and total amounts with '₹' symbol instead of '$'. Ensure all price calculations are shown in INR format."
+        },
+        {
+          "path": "frontend/src/pages/OrderConfirmation.tsx",
+          "operation": "modify",
+          "description": "Update order total display to show '₹' symbol instead of '$'. Change the total amount rendering to use INR formatting."
+        },
+        {
+          "path": "frontend/src/pages/CreateProduct.tsx",
+          "operation": "modify",
+          "description": "Update the price input field label from 'Price (USD)' or similar to 'Price (INR)'. Update any placeholder text or help text to reference INR instead of USD."
+        }
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "summary": "Add 'Food' as a new product category option in frontend UI",
+      "acceptanceCriteria": [
+        "CreateProduct form includes 'Food' in the category dropdown",
+        "Product catalog navigation shows 'Food' as a filterable category",
+        "Products can be created with 'Food' category and displayed correctly"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/CreateProduct.tsx",
+          "operation": "modify",
+          "description": "Add 'Food' option to the category dropdown/select field. The backend already supports the 'food' category enum value, so ensure the form includes this option alongside existing categories (electronics, books, clothing)."
+        },
+        {
+          "path": "frontend/src/components/Header.tsx",
+          "operation": "modify",
+          "description": "Add 'Food' link to the category navigation. Include a navigation link for the Food category that filters products by category=food, matching the existing pattern for Electronics, Books, and Clothing categories."
+        }
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "summary": "Add delivery type field to product UI with '1-hour delivery' and 'Takeaway' options",
+      "acceptanceCriteria": [
+        "CreateProduct form includes a delivery type selector with '1-hour delivery' and 'Takeaway' options",
+        "Backend Product type includes a deliveryType field",
+        "ProductCard shows the delivery type for each product",
+        "ProductDetail page displays the delivery type information",
+        "Existing products handle the new field gracefully (default or migration)"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/CreateProduct.tsx",
+          "operation": "modify",
+          "description": "Add a delivery type selector field to the product creation form with two options: '1-hour delivery' (maps to backend enum 'oneHourDelivery') and 'Takeaway' (maps to backend enum 'takeaway'). Include the deliveryType parameter in the createProduct backend call. The backend already supports the DeliveryType enum with these values."
+        },
+        {
+          "path": "frontend/src/components/ProductCard.tsx",
+          "operation": "modify",
+          "description": "Display the delivery type on each product card. Show the deliveryType field from the product data, converting the backend enum values ('oneHourDelivery', 'takeaway') to display-friendly labels ('1-hour delivery', 'Takeaway'). Position this information near the category or price for visibility."
+        },
+        {
+          "path": "frontend/src/pages/ProductDetail.tsx",
+          "operation": "modify",
+          "description": "Display the delivery type on the product detail page. Show the deliveryType field with appropriate formatting, converting backend enum values to user-friendly labels. Include this in the product information section alongside category and stock information."
+        }
+      ]
+    }
+  ]
+}
