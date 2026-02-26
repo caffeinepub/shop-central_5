@@ -1,37 +1,59 @@
 {
   "kind": "build_request",
-  "title": "Replace 'Wow Momo' references with 'Welcome to Shop Central' on the front page",
+  "title": "Add Products Management & Phone Number Login",
   "projectName": "Shop Central",
   "priority": "normal",
   "requirements": [
     {
       "id": "REQ-1",
-      "text": "Remove all remaining 'Wow Momo' text references from the frontend and replace them with 'Welcome to Shop Central'. This applies to any hero banners, headings, taglines, or introductory copy visible on the homepage/front page (ProductCatalog), as well as Layout, Checkout, and OrderConfirmation pages. No instance of 'Wow Momo' or 'momo' should appear anywhere in the UI.",
-      "target": "frontend",
+      "text": "Replace the current Internet Identity login flow with a phone number-only login. The AuthGuard login prompt and LoginButton component must collect only a phone number (no email or password). Store the phone number as the user identifier and use it to authenticate/create a user session in the backend.",
+      "target": "both",
       "source": {
         "messageIds": [
-          "msg-1"
+          "msg-latest"
         ],
         "quotes": [
-          "Please don't write in front about wow momo only write welcome to shop central"
+          "ask only phone no. For login"
         ]
       },
       "acceptanceCriteria": [
-        "The front/home page (ProductCatalog) displays 'Welcome to Shop Central' as the primary greeting or hero heading.",
-        "No text containing 'Wow Momo' or 'momo' (case-insensitive) is visible anywhere in the app UI.",
-        "Layout footer, Checkout page, and OrderConfirmation page contain no 'Wow Momo' references.",
-        "The Header component continues to display 'Shop Central' branding without any momo references."
+        "The login screen displays a single phone number input field",
+        "No email, password, or Internet Identity prompt is shown",
+        "Submitting a valid phone number logs the user in and creates/retrieves their profile",
+        "Invalid or empty phone number submissions show an appropriate error message",
+        "The backend associates sessions/profiles with the phone number"
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Add an 'Add Product' management option accessible from the navigation header for admin users. This should link to the existing CreateProduct page (or equivalent). Ensure the admin-only Add Product link is visible in both desktop and mobile navigation when the user has admin role.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-latest"
+        ],
+        "quotes": [
+          "add products option"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Admin users see an 'Add Product' link in the header navigation on both desktop and mobile",
+        "Non-admin users do not see the 'Add Product' link",
+        "Clicking 'Add Product' navigates to the product creation form",
+        "The product creation form allows entering product name, description, price, stock, and selecting an image",
+        "Successfully submitting the form creates a new product and shows a confirmation"
       ]
     }
   ],
   "constraints": [
-    "Do not alter any backend logic or data models.",
-    "Do not modify files listed in frontend.immutablePaths."
+    "Do not edit files under frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, or frontend/src/components/ui",
+    "Keep all Motoko backend logic within backend/main.mo single actor"
   ],
   "nonGoals": [
-    "Changing any other branding, colors, or visual design.",
-    "Adding new pages or features.",
-    "Modifying product data or backend actor."
+    "Email or password-based authentication",
+    "SMS OTP verification for phone number (plain phone number entry only)",
+    "Removing or replacing existing product catalog, cart, or checkout flows",
+    "New visual theme changes"
   ],
   "imageRequirements": {
     "required": [],

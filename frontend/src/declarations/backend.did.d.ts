@@ -41,7 +41,7 @@ export interface Product {
 export type ProductId = bigint;
 export interface ShoppingCart { 'total' : bigint, 'items' : Array<OrderItem> }
 export interface UserOrderHistory { 'orders' : Array<Order> }
-export interface UserProfile { 'name' : string }
+export interface UserProfile { 'name' : string, 'phoneNumber' : string }
 export type UserRole = { 'admin' : null } |
   { 'user' : null } |
   { 'guest' : null };

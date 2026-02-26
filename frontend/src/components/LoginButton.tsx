@@ -1,57 +1,54 @@
 import React from 'react';
 import { useInternetIdentity } from '../hooks/useInternetIdentity';
 import { useQueryClient } from '@tanstack/react-query';
-import { LogIn, LogOut, Loader2 } from 'lucide-react';
+import { LogOut, Loader2, Phone } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useGetCallerUserProfile } from '../hooks/useUserProfile';
 
 export default function LoginButton() {
-  const { login, clear, loginStatus, identity } = useInternetIdentity();
+  const { clear, loginStatus, identity } = useInternetIdentity();
   const queryClient = useQueryClient();
+  const { data: userProfile } = useGetCallerUserProfile();
 
   const isAuthenticated = !!identity;
   const isLoggingIn = loginStatus === 'logging-in';
 
-  const handleAuth = async () => {
-    if (isAuthenticated) {
-      await clear();
-      queryClient.clear();
-    } else {
-      try {
-        await login();
-      } catch (error: any) {
-        console.error('Login error:', error);
-        if (error.message === 'User is already authenticated') {
-          await clear();
-          setTimeout(() => login(), 300);
-        }
-      }
-    }
+  const handleLogout = async () => {
+    await clear();
+    queryClient.clear();
+    sessionStorage.removeItem('shop_central_pending_phone');
   };
 
+  if (!isAuthenticated) {
+    // Login is handled by AuthGuard; show nothing or a minimal indicator
+    return null;
+  }
+
   return (
-    <Button
-      onClick={handleAuth}
-      disabled={isLoggingIn}
-      variant={isAuthenticated ? 'outline' : 'default'}
-      size="sm"
-      className="gap-1.5"
-    >
-      {isLoggingIn ? (
-        <>
-          <Loader2 className="w-4 h-4 animate-spin" />
-          <span className="hidden sm:inline">Logging in...</span>
-        </>
-      ) : isAuthenticated ? (
-        <>
-          <LogOut className="w-4 h-4" />
-          <span className="hidden sm:inline">Logout</span>
-        </>
-      ) : (
-        <>
-          <LogIn className="w-4 h-4" />
-          <span className="hidden sm:inline">Login</span>
-        </>
+    <div className="flex items-center gap-2">
+      {/* Show phone number if available */}
+      {userProfile?.phoneNumber && (
+        <div className="hidden sm:flex items-center gap-1.5 text-xs text-muted-foreground bg-muted px-2.5 py-1.5 rounded-full">
+          <Phone className="w-3 h-3" />
+          <span>{userProfile.phoneNumber.replace(/^(\+91)?(\d{3})(\d{3})(\d{4})$/, '+91 $2-$3-$4')}</span>
+        </div>
       )}
-    </Button>
+      <Button
+        onClick={handleLogout}
+        disabled={isLoggingIn}
+        variant="outline"
+        size="sm"
+        className="gap-1.5"
+      >
+        {isLoggingIn ? (
+          <Loader2 className="w-4 h-4 animate-spin" />
+        ) : (
+          <>
+            <LogOut className="w-4 h-4" />
+            <span className="hidden sm:inline">Logout</span>
+          </>
+        )}
+      </Button>
+    </div>
   );
 }

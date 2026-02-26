@@ -1,14 +1,65 @@
 {
   "kind": "spec_vs_diff_report",
   "version": "1.0",
-  "generatedAt": "2026-02-25T14:07:42.744Z",
-  "summary": "The diff implements REQ-1 by updating ProductCatalog.tsx to display 'Welcome to Shop Central' as the hero heading. The frontend-file-summaries.txt confirms that Layout.tsx, Header.tsx, Checkout.tsx, OrderConfirmation.tsx, and ShoppingCart.tsx also have no 'Wow Momo' references remaining. All acceptance criteria appear to be addressed across the modified files.",
-  "missing_requirements": [],
-  "hallucinated_features": [],
-  "confidence": 0.88,
+  "generatedAt": "2026-02-26T05:00:07.930Z",
+  "summary": "The diff implements both REQ-1 (phone number login) and REQ-2 (admin Add Product navigation). REQ-1 is largely fulfilled: AuthGuard shows a phone-number-only input with validation and error messages, LoginButton shows logout/phone display, ProfileSetup stores phone number, and the backend UserProfile now includes phoneNumber. REQ-2 is largely fulfilled: Header.tsx includes an admin 'Add Product' link for both desktop and mobile, and App.tsx includes the /admin/create-product route. However, some acceptance criteria have gaps, particularly around Internet Identity still being used as the underlying auth mechanism.",
+  "missing_requirements": [
+    {
+      "id": "REQ-1",
+      "requirement": "No email, password, or Internet Identity prompt is shown; phone number IS the authentication mechanism (not just stored alongside II)",
+      "reason": "The AuthGuard stores the phone in sessionStorage and then calls login() which still triggers Internet Identity (useInternetIdentity hook). The phone number is collected but II is still the underlying auth; the user may still see an II popup. The phone is used to populate the profile but not as the sole session identifier.",
+      "evidence": [
+        "frontend/src/components/AuthGuard.tsx"
+      ]
+    },
+    {
+      "id": "REQ-1",
+      "requirement": "The backend associates sessions/profiles with the phone number as the primary identifier",
+      "reason": "The backend still uses Principal (from Internet Identity) as the map key for userProfiles, with phoneNumber added only as a profile data field. Sessions are still Principal-based, not phone-number-based.",
+      "evidence": [
+        "backend/main.mo"
+      ]
+    }
+  ],
+  "hallucinated_features": [
+    {
+      "description": "Migration module (backend/migration.mo) added to handle old UserProfile to new UserProfile with phoneNumber field",
+      "reason": "No migration module was requested in the build request. While adding phoneNumber to the backend profile is requested, a separate migration.mo file was not specified.",
+      "evidence": [
+        "backend/migration.mo"
+      ]
+    },
+    {
+      "description": "Phone number displayed as a formatted pill badge in the header for authenticated users",
+      "reason": "The build request does not specify displaying the user's phone number in the header navigation after login. This is an extra UI feature not requested.",
+      "evidence": [
+        "frontend/src/components/LoginButton.tsx"
+      ]
+    },
+    {
+      "description": "Indian phone number validation with +91 prefix enforced using regex restricting to digits starting with 6-9",
+      "reason": "The build request specifies phone number login but does not restrict to Indian numbers or require +91 prefix validation. This is a regional constraint not requested.",
+      "evidence": [
+        "frontend/src/components/AuthGuard.tsx",
+        "frontend/src/components/ProfileSetup.tsx"
+      ]
+    },
+    {
+      "description": "ProfileSetup modal collects both name AND phone number for new users after login",
+      "reason": "The build request only specifies phone number as the login/identifier field. Collecting a name in a separate profile setup modal was not specified as a requirement.",
+      "evidence": [
+        "frontend/src/components/ProfileSetup.tsx"
+      ]
+    }
+  ],
+  "confidence": 0.72,
   "changed_files": [
+    "backend/main.mo",
+    "backend/migration.mo",
     "frontend-file-summaries.txt",
-    "frontend/src/pages/ProductCatalog.tsx",
+    "frontend/src/components/AuthGuard.tsx",
+    "frontend/src/components/LoginButton.tsx",
+    "frontend/src/components/ProfileSetup.tsx",
     "project_state.json"
   ]
 }

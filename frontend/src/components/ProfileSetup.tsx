@@ -1,57 +1,127 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useGetCallerUserProfile, useSaveCallerUserProfile } from '../hooks/useUserProfile';
 import { useInternetIdentity } from '../hooks/useInternetIdentity';
+import { PENDING_PHONE_KEY } from './AuthGuard';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Button } from '@/components/ui/button';
+import { User, Phone } from 'lucide-react';
 
 export default function ProfileSetup() {
   const { identity } = useInternetIdentity();
   const { data: userProfile, isLoading: profileLoading, isFetched } = useGetCallerUserProfile();
   const saveProfile = useSaveCallerUserProfile();
   const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
+  const [phoneError, setPhoneError] = useState('');
 
   const isAuthenticated = !!identity;
   const showProfileSetup = isAuthenticated && !profileLoading && isFetched && userProfile === null;
 
+  // Pre-populate phone from sessionStorage when modal appears
+  useEffect(() => {
+    if (showProfileSetup) {
+      const pendingPhone = sessionStorage.getItem(PENDING_PHONE_KEY);
+      if (pendingPhone) {
+        setPhone(pendingPhone);
+      }
+    }
+  }, [showProfileSetup]);
+
+  const validatePhone = (value: string): boolean => {
+    const cleaned = value.replace(/\s+/g, '');
+    if (!cleaned) {
+      setPhoneError('Phone number is required');
+      return false;
+    }
+    const phoneRegex = /^(\+91)?[6-9]\d{9}$/;
+    if (!phoneRegex.test(cleaned)) {
+      setPhoneError('Enter a valid 10-digit phone number');
+      return false;
+    }
+    setPhoneError('');
+    return true;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (name.trim()) {
-      await saveProfile.mutateAsync({ name: name.trim() });
-    }
+    if (!name.trim()) return;
+    const cleanedPhone = phone.replace(/\s+/g, '');
+    if (!validatePhone(cleanedPhone)) return;
+
+    await saveProfile.mutateAsync({
+      name: name.trim(),
+      phoneNumber: cleanedPhone,
+    });
+
+    // Clear the pending phone from sessionStorage
+    sessionStorage.removeItem(PENDING_PHONE_KEY);
   };
 
   if (!showProfileSetup) return null;
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-      <div className="bg-card rounded-lg shadow-medium max-w-md w-full p-6 space-y-4">
-        <div className="space-y-2">
-          <h2 className="text-2xl font-serif font-bold text-foreground">Welcome!</h2>
-          <p className="text-muted-foreground">Please tell us your name to get started.</p>
+      <div className="bg-card rounded-2xl shadow-medium max-w-md w-full p-6 space-y-5 border border-border">
+        <div className="space-y-1">
+          <h2 className="text-2xl font-bold text-foreground font-heading">Complete Your Profile</h2>
+          <p className="text-muted-foreground text-sm">Just a few details to get you started.</p>
         </div>
+
         <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
+          {/* Name */}
+          <div className="space-y-1.5">
+            <Label htmlFor="profile-name" className="flex items-center gap-1.5">
+              <User className="w-3.5 h-3.5" />
               Your Name
-            </label>
-            <input
-              id="name"
+            </Label>
+            <Input
+              id="profile-name"
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              placeholder="Enter your name"
+              placeholder="Enter your full name"
               required
-              className="w-full px-4 py-2 border border-input rounded-lg bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+              autoFocus
             />
           </div>
-          <button
+
+          {/* Phone */}
+          <div className="space-y-1.5">
+            <Label htmlFor="profile-phone" className="flex items-center gap-1.5">
+              <Phone className="w-3.5 h-3.5" />
+              Phone Number
+            </Label>
+            <div className="flex gap-2">
+              <div className="flex items-center px-3 bg-muted border border-input rounded-lg text-sm text-muted-foreground font-medium shrink-0">
+                🇮🇳 +91
+              </div>
+              <Input
+                id="profile-phone"
+                type="tel"
+                value={phone}
+                onChange={(e) => {
+                  setPhone(e.target.value);
+                  if (phoneError) setPhoneError('');
+                }}
+                placeholder="9876543210"
+                maxLength={13}
+                className={phoneError ? 'border-destructive' : ''}
+              />
+            </div>
+            {phoneError && <p className="text-xs text-destructive">{phoneError}</p>}
+          </div>
+
+          <Button
             type="submit"
+            className="w-full"
+            size="lg"
             disabled={saveProfile.isPending || !name.trim()}
-            className="w-full px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {saveProfile.isPending ? 'Saving...' : 'Continue'}
-          </button>
+            {saveProfile.isPending ? 'Saving...' : 'Start Shopping'}
+          </Button>
         </form>
       </div>
     </div>
   );
 }
-

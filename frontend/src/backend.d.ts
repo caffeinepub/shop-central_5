@@ -13,6 +13,7 @@ export interface ShoppingCart {
 }
 export interface UserProfile {
     name: string;
+    phoneNumber: string;
 }
 export interface UserOrderHistory {
     orders: Array<Order>;

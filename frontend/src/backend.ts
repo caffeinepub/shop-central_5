@@ -95,6 +95,7 @@ export interface ShoppingCart {
 }
 export interface UserProfile {
     name: string;
+    phoneNumber: string;
 }
 export interface _CaffeineStorageRefillResult {
     success?: boolean;

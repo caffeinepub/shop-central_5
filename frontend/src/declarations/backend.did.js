@@ -45,7 +45,10 @@ export const Product = IDL.Record({
   'category' : Category,
   'price' : IDL.Nat,
 });
-export const UserProfile = IDL.Record({ 'name' : IDL.Text });
+export const UserProfile = IDL.Record({
+  'name' : IDL.Text,
+  'phoneNumber' : IDL.Text,
+});
 export const OrderItem = IDL.Record({
   'productId' : ProductId,
   'quantity' : IDL.Nat,
@@ -177,7 +180,10 @@ export const idlFactory = ({ IDL }) => {
     'category' : Category,
     'price' : IDL.Nat,
   });
-  const UserProfile = IDL.Record({ 'name' : IDL.Text });
+  const UserProfile = IDL.Record({
+    'name' : IDL.Text,
+    'phoneNumber' : IDL.Text,
+  });
   const OrderItem = IDL.Record({
     'productId' : ProductId,
     'quantity' : IDL.Nat,

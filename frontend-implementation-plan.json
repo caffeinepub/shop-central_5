@@ -1,42 +1,61 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Replace 'Wow Momo' references with 'Welcome to Shop Central' on the front page",
+  "title": "Add Products Management & Phone Number Login",
   "requirements": [
     {
       "id": "REQ-1",
-      "summary": "Remove all 'Wow Momo' text references from the frontend and replace them with 'Welcome to Shop Central'",
+      "summary": "Replace Internet Identity login with phone number-only authentication",
       "acceptanceCriteria": [
-        "The front/home page (ProductCatalog) displays 'Welcome to Shop Central' as the primary greeting or hero heading.",
-        "No text containing 'Wow Momo' or 'momo' (case-insensitive) is visible anywhere in the app UI.",
-        "Layout footer, Checkout page, and OrderConfirmation page contain no 'Wow Momo' references.",
-        "The Header component continues to display 'Shop Central' branding without any momo references."
+        "The login screen displays a single phone number input field",
+        "No email, password, or Internet Identity prompt is shown",
+        "Submitting a valid phone number logs the user in and creates/retrieves their profile",
+        "Invalid or empty phone number submissions show an appropriate error message",
+        "The backend associates sessions/profiles with the phone number"
       ],
       "file_operations": [
         {
-          "path": "frontend/src/pages/ProductCatalog.tsx",
-          "operation": "modify",
-          "description": "Replace any 'Wow Momo' text with 'Welcome to Shop Central' in hero banners, headings, taglines, or introductory copy. Ensure the primary greeting or hero heading displays 'Welcome to Shop Central'. Search the file for any case-insensitive instances of 'momo' or 'Wow Momo' and replace them."
-        },
-        {
-          "path": "frontend/src/components/Layout.tsx",
-          "operation": "modify",
-          "description": "Remove any 'Wow Momo' references from the footer text or other layout content. Ensure store location information and any other text contains no momo references."
-        },
-        {
-          "path": "frontend/src/pages/Checkout.tsx",
-          "operation": "modify",
-          "description": "Search for and remove any 'Wow Momo' references in form labels, headings, helper text, or submission messages. Replace with appropriate 'Shop Central' branding where needed."
-        },
-        {
-          "path": "frontend/src/pages/OrderConfirmation.tsx",
-          "operation": "modify",
-          "description": "Remove any 'Wow Momo' references from confirmation messages, pickup location text, or order status displays. Replace with 'Shop Central' branding where appropriate."
-        },
-        {
           "path": "frontend/src/components/AuthGuard.tsx",
           "operation": "modify",
-          "description": "Verify that the login prompt displays 'Welcome to Shop Central' (as mentioned in the file summary) and contains no 'Wow Momo' or momo references."
+          "description": "Replace the Internet Identity login prompt with a phone number input form. Show a phone number field with validation (empty check, basic format check). On submission, call the modified login flow that accepts a phone number. Display loading state during authentication and error messages for invalid inputs."
+        },
+        {
+          "path": "frontend/src/components/LoginButton.tsx",
+          "operation": "modify",
+          "description": "Update the login button to trigger a phone number collection flow instead of Internet Identity. When clicked in logged-out state, show a modal or inline form collecting phone number. Pass the phone number to the backend authentication. Maintain the logout functionality to clear queries and reset state."
+        },
+        {
+          "path": "frontend/src/components/ProfileSetup.tsx",
+          "operation": "modify",
+          "description": "Update the profile setup modal to pre-populate or associate the user's phone number (already collected during login) with their profile. The phone number should be stored as part of the UserProfile. Continue to collect the user's name on first login."
+        },
+        {
+          "path": "frontend/src/hooks/useInternetIdentity.ts",
+          "operation": "modify",
+          "description": "Replace Internet Identity authentication logic with a phone number-based authentication mechanism. Store the phone number as the user identifier. Implement login(phoneNumber: string) that authenticates using the phone number. Update the identity/principal derivation to use the phone number. Maintain the clear() logout function. Note: This will require coordination with backend authentication but keep the hook's interface similar for minimal downstream changes."
+        },
+        {
+          "path": "frontend/src/hooks/useUserProfile.ts",
+          "operation": "modify",
+          "description": "Update the user profile hooks to handle phone number as a required field in UserProfile. Ensure getCallerUserProfile and saveCallerUserProfile work with the phone number-based authentication. The phone number should be included when saving profiles."
+        }
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "summary": "Add admin-only 'Add Product' navigation link to header",
+      "acceptanceCriteria": [
+        "Admin users see an 'Add Product' link in the header navigation on both desktop and mobile",
+        "Non-admin users do not see the 'Add Product' link",
+        "Clicking 'Add Product' navigates to the product creation form",
+        "The product creation form allows entering product name, description, price, stock, and selecting an image",
+        "Successfully submitting the form creates a new product and shows a confirmation"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/Header.tsx",
+          "operation": "modify",
+          "description": "Add an 'Add Product' navigation link in both the desktop and mobile navigation sections. Use the useUserRole hook to check if the current user is an admin. Conditionally render the 'Add Product' link only when isCallerAdmin returns true. The link should navigate to '/create-product' route. Position it between the 'Shop' and 'Cart' links in the navigation order."
         }
       ]
     }
