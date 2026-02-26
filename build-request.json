@@ -1,0 +1,40 @@
+{
+  "kind": "build_request",
+  "title": "Replace 'Wow Momo' references with 'Welcome to Shop Central' on the front page",
+  "projectName": "Shop Central",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "text": "Remove all remaining 'Wow Momo' text references from the frontend and replace them with 'Welcome to Shop Central'. This applies to any hero banners, headings, taglines, or introductory copy visible on the homepage/front page (ProductCatalog), as well as Layout, Checkout, and OrderConfirmation pages. No instance of 'Wow Momo' or 'momo' should appear anywhere in the UI.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Please don't write in front about wow momo only write welcome to shop central"
+        ]
+      },
+      "acceptanceCriteria": [
+        "The front/home page (ProductCatalog) displays 'Welcome to Shop Central' as the primary greeting or hero heading.",
+        "No text containing 'Wow Momo' or 'momo' (case-insensitive) is visible anywhere in the app UI.",
+        "Layout footer, Checkout page, and OrderConfirmation page contain no 'Wow Momo' references.",
+        "The Header component continues to display 'Shop Central' branding without any momo references."
+      ]
+    }
+  ],
+  "constraints": [
+    "Do not alter any backend logic or data models.",
+    "Do not modify files listed in frontend.immutablePaths."
+  ],
+  "nonGoals": [
+    "Changing any other branding, colors, or visual design.",
+    "Adding new pages or features.",
+    "Modifying product data or backend actor."
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  }
+}

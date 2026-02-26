@@ -1,0 +1,44 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Replace 'Wow Momo' references with 'Welcome to Shop Central' on the front page",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "summary": "Remove all 'Wow Momo' text references from the frontend and replace them with 'Welcome to Shop Central'",
+      "acceptanceCriteria": [
+        "The front/home page (ProductCatalog) displays 'Welcome to Shop Central' as the primary greeting or hero heading.",
+        "No text containing 'Wow Momo' or 'momo' (case-insensitive) is visible anywhere in the app UI.",
+        "Layout footer, Checkout page, and OrderConfirmation page contain no 'Wow Momo' references.",
+        "The Header component continues to display 'Shop Central' branding without any momo references."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/ProductCatalog.tsx",
+          "operation": "modify",
+          "description": "Replace any 'Wow Momo' text with 'Welcome to Shop Central' in hero banners, headings, taglines, or introductory copy. Ensure the primary greeting or hero heading displays 'Welcome to Shop Central'. Search the file for any case-insensitive instances of 'momo' or 'Wow Momo' and replace them."
+        },
+        {
+          "path": "frontend/src/components/Layout.tsx",
+          "operation": "modify",
+          "description": "Remove any 'Wow Momo' references from the footer text or other layout content. Ensure store location information and any other text contains no momo references."
+        },
+        {
+          "path": "frontend/src/pages/Checkout.tsx",
+          "operation": "modify",
+          "description": "Search for and remove any 'Wow Momo' references in form labels, headings, helper text, or submission messages. Replace with appropriate 'Shop Central' branding where needed."
+        },
+        {
+          "path": "frontend/src/pages/OrderConfirmation.tsx",
+          "operation": "modify",
+          "description": "Remove any 'Wow Momo' references from confirmation messages, pickup location text, or order status displays. Replace with 'Shop Central' branding where appropriate."
+        },
+        {
+          "path": "frontend/src/components/AuthGuard.tsx",
+          "operation": "modify",
+          "description": "Verify that the login prompt displays 'Welcome to Shop Central' (as mentioned in the file summary) and contains no 'Wow Momo' or momo references."
+        }
+      ]
+    }
+  ]
+}

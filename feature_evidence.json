@@ -1,0 +1,25 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-remove-all-remaining-wow-momo-text-references-from-the-frontend-and-replace-them-with-welcome-to-shop-central-this-applies-to-any-hero-banners-headings-taglines-or-introductory-copy-visible-on-the-homepage-front-page-productcatalog-as-well-as-layout-checkout-and-orderconfirmation-pages-no-instance-of-wow-momo-or-momo-should-appear-anywhere-in-the-ui",
+      "featureTitle": "Remove all remaining 'Wow Momo' text references from the frontend and replace them with 'Welcome to Shop Central'. This applies to any hero banners, headings, taglines, or introductory copy visible on the homepage/front page (ProductCatalog), as well as Layout, Checkout, and OrderConfirmation pages. No instance of 'Wow Momo' or 'momo' should appear anywhere in the UI.",
+      "files": [
+        "frontend/src/pages/ProductCatalog.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-1"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 3,
+  "summary": "E-commerce shop project called 'Shop Central' — user wants the homepage/front page to display 'Welcome to Shop Central' instead of any 'Wow Momo' branding.",
+  "architectural_notes": [],
+  "known_issues": [],
+  "isFixRequest": true,
+  "existing_features": [
+    {
+      "id": "feature-remove-all-remaining-wow-momo-text-references-from-the-frontend-and-replace-them-with-welcome-to-shop-central-this-applies-to-any-hero-banners-headings-taglines-or-introductory-copy-visible-on-the-homepage-front-page-productcatalog-as-well-as-layout-checkout-and-orderconfirmation-pages-no-instance-of-wow-momo-or-momo-should-appear-anywhere-in-the-ui",
+      "title": "Remove all remaining 'Wow Momo' text references from the frontend and replace them with 'Welcome to Shop Central'. This applies to any hero banners, headings, taglines, or introductory copy visible on the homepage/front page (ProductCatalog), as well as Layout, Checkout, and OrderConfirmation pages. No instance of 'Wow Momo' or 'momo' should appear anywhere in the UI.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [],
+  "gameProjectType": "none",
+  "projectName": "Shop Central",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

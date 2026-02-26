@@ -1,0 +1,41 @@
+{
+  "kind": "coverage_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-25T14:07:42.747Z",
+  "sources": {
+    "buildRequest": true,
+    "implementationPlan": true
+  },
+  "requirements": {
+    "total": 1,
+    "implemented": 1,
+    "items": [
+      {
+        "id": "REQ-1",
+        "summary": "Remove all remaining 'Wow Momo' text references from the frontend and replace them with 'Welcome to Shop Central'. This applies to any hero banners, headings, taglines, or introductory copy visible on the homepage/front page (ProductCatalog), as well as Layout, Checkout, and OrderConfirmation pages. No instance of 'Wow Momo' or 'momo' should appear anywhere in the UI.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/ProductCatalog.tsx",
+          "frontend/src/components/Layout.tsx",
+          "frontend/src/pages/Checkout.tsx",
+          "frontend/src/pages/OrderConfirmation.tsx",
+          "frontend/src/components/AuthGuard.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/ProductCatalog.tsx"
+        ]
+      }
+    ]
+  },
+  "changedFiles": [
+    "build-request.json",
+    "feature_evidence.json",
+    "frontend-file-summaries.txt",
+    "frontend-implementation-plan.json",
+    "frontend/src/pages/ProductCatalog.tsx",
+    "project_state.json",
+    "scratch/component-selection.json",
+    "spec.md",
+    "spec_vs_diff_report.json"
+  ]
+}
